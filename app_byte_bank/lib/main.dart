@@ -12,6 +12,7 @@ class BytebankApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Byte Bank',
+      home: const HomePage(title: 'Dashboard'),
       theme: ThemeData(
         useMaterial3: true,
         colorSchemeSeed: const Color(0xff005AD1),
@@ -22,7 +23,6 @@ class BytebankApp extends StatelessWidget {
         colorSchemeSeed: const Color(0xff005AD1),
         brightness: Brightness.dark,
       ),
-      home: const HomePage(title: 'Dashboard'),
     );
   }
 }

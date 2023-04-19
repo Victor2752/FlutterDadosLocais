@@ -1,3 +1,4 @@
+import 'package:app_byte_bank/src/pages/contatos_lista.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -24,65 +25,95 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: SingleChildScrollView(
-        child: Column(children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: Image.asset('images/sqg_tec_logo.png', width: 320),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/contacts');
-                  },
-                  child: Row(children: const [
-                    Icon(Icons.people),
-                    Text('Contacts'),
-                  ])),
-              ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/transactions');
-                  },
-                  child: Row(children: const [
-                    Icon(Icons.monetization_on),
-                    Text('Transactions'),
-                  ])),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(16),
+                child: Image.asset('images/sqg_tec_logo.png', width: 320),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => ListaContatos(
+                            key: UniqueKey(),
+                          ),
+                        ),
+                      );
+                    },
+                    child: Row(
+                      children: const [
+                        Icon(Icons.people),
+                        Text('Contatos'),
+                      ],
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => ListaContatos(
+                            key: UniqueKey(),
+                          ),
+                        ),
+                      );
+                    },
+                    child: Row(
+                      children: const [
+                        Icon(Icons.monetization_on),
+                        Text('Transações'),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              Wrap(children: [
+                Material(
+                  color: Theme.of(context).colorScheme.surface,
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => ListaContatos(
+                            key: UniqueKey(),
+                          ),
+                        ),
+                      );
+                    },
+                    child: const Card(
+                      child: ListTile(
+                        leading: Icon(
+                          Icons.account_circle,
+                          size: 32,
+                        ),
+                        title: Text('Nome'),
+                      ),
+                    ),
+                  ),
+                ),
+              ]),
+              Column(
+                children: [
+                  const Center(
+                    child: Text('You have pushed the button this many times:'),
+                  ),
+                  Center(
+                    child: Text(
+                      '$_counter',
+                      style: Theme.of(context).textTheme.headline4,
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
-          Column(children: [
-            const Center(
-              child: Text('You have pushed the button this many times:'),
-            ),
-            Center(
-              child: Text(
-                '$_counter',
-                style: Theme.of(context).textTheme.headline4,
-              ),
-            ),
-          ]),
-          Wrap(children: const [
-            Card(
-              child: ListTile(
-                leading: Icon(
-                  Icons.account_circle,
-                  size: 32,
-                ),
-                title: Text('Nome'),
-              ),
-            ),
-            Card(
-              child: ListTile(
-                leading: Icon(
-                  Icons.account_circle,
-                  size: 32,
-                ),
-                title: Text('Nome'),
-              ),
-            ),
-          ]),
-        ]),
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
