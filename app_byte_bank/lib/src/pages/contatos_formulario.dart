@@ -1,7 +1,14 @@
+import 'package:app_byte_bank/database/dao/contatos_dao.dart';
+import 'package:app_byte_bank/src/models/contato.dart';
 import 'package:flutter/material.dart';
 
 class FormularioContato extends StatelessWidget {
-  const FormularioContato({Key? key}) : super(key: key);
+  FormularioContato({Key? key}) : super(key: key);
+
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _accountNumberController =
+      TextEditingController();
+  final ContatoDao _contatoDao = ContatoDao();
 
   @override
   Widget build(BuildContext context) {
@@ -13,16 +20,18 @@ class FormularioContato extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: <Widget>[
-            const TextField(
-              decoration: InputDecoration(
+            TextField(
+              controller: _nameController,
+              decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'Nome Completo',
                 hintText: 'Digite o nome completo',
               ),
             ),
             const Espaco(),
-            const TextField(
-              decoration: InputDecoration(
+            TextField(
+              controller: _accountNumberController,
+              decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'Numero da conta',
                 hintText: '0000',
@@ -35,7 +44,17 @@ class FormularioContato extends StatelessWidget {
               width: double.maxFinite,
               child: ElevatedButton(
                 onPressed: () {
-                  debugPrint('Clicou no botão');
+                  final String name = _nameController.text;
+                  final int accountNumber = int.tryParse(
+                        _accountNumberController.text,
+                      ) ??
+                      0;
+                  final Contato novoContato = Contato(
+                    0,
+                    name,
+                    accountNumber,
+                  );
+                  _contatoDao.save(novoContato).then((id) => Navigator.pop(context, novoContato));
                 },
                 child: const Text('Criar'),
               ),

@@ -13,6 +13,7 @@ class BytebankApp extends StatelessWidget {
     return MaterialApp(
       title: 'Byte Bank',
       home: const HomePage(title: 'Dashboard'),
+      themeMode: ThemeMode.system,
       theme: ThemeData(
         useMaterial3: true,
         colorSchemeSeed: const Color(0xff005AD1),
